@@ -27,7 +27,7 @@ export class AddSpotForm extends React.Component {
     const data = d;
     console.log("[postnewlist] data", typeof data, data);
     await axios
-      .post("/submit_new_trip", data)
+      .post(process.env.REACT_APP_BE_URL +"/submit_new_trip", data)
       .then(function(response) {
         console.log("[AddSpotForm] Success!");
       })
@@ -61,7 +61,7 @@ export class AddSpotForm extends React.Component {
     console.log("[AddSpotForm] Await axios...");
     const data = { data: this.props.currentUser };
     await axios
-      .post("/get_user_itins", data)
+      .post(process.env.REACT_APP_BE_URL + "/get_user_itins", data)
       .then(function(response) {
         const itins = response.data; //type: string
         const itins_parsed = JSON.parse(itins.replaceAll(/'/g, `"`)); // Parse to list and replace single qoute with double for the parser
@@ -85,7 +85,7 @@ export class AddSpotForm extends React.Component {
     var self = this;
     const data = d;
     await axios
-      .post("/submitSpot", data)
+      .post(process.env.REACT_APP_BE_URL +"/submitSpot", data)
       .then(function(response) {
         console.log("success!")
       })

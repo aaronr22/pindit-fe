@@ -39,7 +39,7 @@ class App extends React.Component {
     var self = this;
     console.log("Await axios...");
     await axios
-      .get("/get_all_spots")
+      .get(process.env.REACT_APP_BE_URL +"/get_all_spots")
       .then(function(response) {
         self.setState({
           markerDetails: response.data
@@ -53,7 +53,7 @@ class App extends React.Component {
    handleCreateUsernameSubmit = async (val) => {
     var self = this;
     await axios
-      .post("/create_username", { username: val })
+      .post(process.env.REACT_APP_BE_URL +"/create_username", { username: val })
       .then(function(res) {
         console.log("[CreateUsername][Then]", res);
         // if its good, then hide the form
@@ -79,7 +79,7 @@ class App extends React.Component {
     var self = this;
     console.log("await axios guide");
     await axios
-      .get("/get_all_trips")
+      .get(process.env.REACT_APP_BE_URL +"/get_all_trips")
       .then(function(response) {
         self.setState({
           guideDetails: response.data
@@ -114,7 +114,7 @@ class App extends React.Component {
     var self = this;
     console.log("Await axios...");
     await axios
-      .post("/test_login", { token: res.tokenId })
+      .post(process.env.REACT_APP_BE_URL +"/test_login", { token: res.tokenId })
       .then(function(response) {
         console.log("[Login]", response);
         if (response.data.status === "failure") {

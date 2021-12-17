@@ -52,7 +52,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://aaroon-travel-v4-staging.herokuapp.com/",
   "devDependencies": {
     "dotenv-webpack": "^7.0.3"
   }

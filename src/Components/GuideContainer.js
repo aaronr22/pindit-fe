@@ -23,7 +23,7 @@ const GuideContainer = (props) => {
 
   async function getMarkerDetails() {
     console.log("[GuideContainer][getMarkerDetails]")
-    let url = "/" + params.id;
+    let url = process.env.REACT_APP_BE_URL + "/" + params.id;
     await axios
       .get(url)
       .then(function(response) {

@@ -11,7 +11,6 @@ const CreateUsername = props => {
 
   const handleSubmit = event => {
       event.preventDefault();
-        // TODO :axios request
         props.handleSubmit(username)
   }
 
