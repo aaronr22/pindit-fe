@@ -1,0 +1,59 @@
+{
+  "name": "pindit-v5",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@googlemaps/react-wrapper": "^1.1.12",
+    "@material-ui/core": "^4.12.3",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.24.0",
+    "bootstrap": "^5.1.3",
+    "dotenv": "^10.0.0",
+    "fs": "0.0.1-security",
+    "google-maps-react": "^2.0.6",
+    "mui-datatables": "^4.0.0",
+    "react": "^17.0.2",
+    "react-bootstrap": "^2.0.2",
+    "react-dom": "^17.0.2",
+    "react-google-login": "^5.2.2",
+    "react-google-places-autocomplete": "^3.3.2",
+    "react-hook-form": "^7.19.5",
+    "react-icons": "^4.3.1",
+    "react-query": "^3.32.3",
+    "react-router-dom": "^6.0.2",
+    "react-scripts": "5.0.0",
+    "universal-cookie": "^4.0.4",
+    "web-vitals": "^2.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "start-api": "cd api && venv/bin/flask run --no-debugger",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:5000",
+  "devDependencies": {
+    "dotenv-webpack": "^7.0.3"
+  }
+}

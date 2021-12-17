@@ -1,0 +1,142 @@
+@font-face {
+  font-family: "Airbnb Cereal App Book";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Airbnb Cereal App Book"),
+    url("static/font/AirbnbCerealBook.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Airbnb Cereal App Light";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Airbnb Cereal App Light"),
+    url("static/font/AirbnbCerealLight.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Airbnb Cereal App Medium";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Airbnb Cereal App Medium"),
+    url("static/font/AirbnbCerealMedium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Airbnb Cereal App Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Airbnb Cereal App Bold"),
+    url("static/font/AirbnbCerealBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Airbnb Cereal App Extra Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Airbnb Cereal App Extra Bold"),
+    url("static/font/AirbnbCerealExtraBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Airbnb Cereal App Black";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Airbnb Cereal App Black"),
+    url("static/font/AirbnbCerealBlack.woff") format("woff");
+}
+
+html, body {
+  /* background-image: url("white-waves.png"); */
+  font-family: "Airbnb Cereal App Book" !important;
+  font-size: 16px;
+}
+
+@media (max-width: 900px) {
+  html, body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 300px) {
+  html, body {
+    font-size: 8px;
+  }
+}
+
+.mapContainer {
+  height: 100%;
+  width: 100%;
+}
+
+.comment {
+  font-size: 1rem !important;
+  font-family: "Airbnb Cereal App Book";
+}
+
+.comment-title {
+  text-align: right !important;
+  font-size: .8rem !important;
+  font-family: "Airbnb Cereal App Light";
+}
+
+.title-sub-text {
+  font-family: "Airbnb Cereal App Light" !important;
+  font-weight: 400 !important;
+  font-size: 22px !important;
+  font-size: 1.5rem !important;
+}
+h1 {
+  font-family: "Airbnb Cereal App Book" !important;
+  font-weight: 700 !important;
+  font-size: 28px !important;
+  font-size: 1.75rem !important;
+  color: black;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 0px !important;
+}
+
+.mapContainerContainer {
+  padding: 0px !important;
+}
+
+.commentContainer {
+  border-bottom-width: 1px;
+  border-bottom: 1px solid rgb(235, 235, 235);
+}
+
+.commentColumnTitle {
+  text-align: center !important;
+  font-size: 1.5rem !important;
+  font-family: "Airbnb Cereal App Medium";
+}
+
+.navbar h1 {
+  color: white;
+  font-family: "Airbnb Cereal App Bold";
+}
+.navbar {
+  width:100%;
+}
+
+.addSpotForm {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  padding: .4rem;
+  border-bottom-width: 1px;
+  border-top-width: 1px;
+  border-bottom: 1px solid rgb(235, 235, 235);
+  border-top: 1px solid rgb(235, 235, 235);
+}
+
+.autocomplete {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.x {
+  padding: 0px !important;
+  display: flex;
+  justify-content: right;
+  align-items:right;
+}
+
