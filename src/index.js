@@ -25,9 +25,12 @@ class App extends React.Component {
       currentUser: "",
       createUsername: false
     };
-    // const cookies = new Cookies();
+    this.cookies = new Cookies();
     // cookies.set("user", 'aaronr22', {path: '/'})
   }
+
+
+
 
   /*
     Get request to /get_all_spots
@@ -59,8 +62,13 @@ class App extends React.Component {
         // if its good, then hide the form
         console.log("[res.data.type]", res.data.type);
         if (res.data.type === "success") {
+          // TODO: set cookie = to the username
+          let u_name = res.data.username;
+          // const cookies = new Cookies();
+          self.cookies.set("user", u_name, { path: "/" });
           self.setState({
-            createUsername: false
+            createUsername: false,
+            currentUser: u_name
           });
         } else {
         // if not good, keep the form and add an error message
@@ -122,8 +130,15 @@ class App extends React.Component {
           self.onLogoutSuccess();
         } else if (response.data.create_user === "true") {
           self.setState({ createUsername: true });
+        } else {
+          console.log("[login][success] username:", response.data.username)
+          // const cookies = new Cookies();
+          self.cookies.set("user", response.data.username, { path: "/" });
+          self.setState({
+            currentUser: response.data.username
+          });
         }
-        //TODO: do i need to set a cookie for username
+        //TODO: else if set cookie for username
       })
       .catch(function(error) {
         console.log(error);
@@ -131,11 +146,7 @@ class App extends React.Component {
 
     // TODO: ajax call to /login to do server side login
 
-    const cookies = new Cookies();
-    cookies.set("user", currentUser, { path: "/" });
-    this.setState({
-      currentUser: currentUser
-    });
+
 
     refreshTokenSetup(res);
   };
