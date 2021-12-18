@@ -25,8 +25,8 @@ const CardGrid = props => {
               >
                 <GuideCard
                   title={row.title}
-                  user={row.user}
-                  clicks={row.clicks}
+                  user={row.name}
+                  clicks={row.visits}
                   id={row.id}
                 />
               </div>

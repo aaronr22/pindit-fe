@@ -26,11 +26,7 @@ class App extends React.Component {
       createUsername: false
     };
     this.cookies = new Cookies();
-    // cookies.set("user", 'aaronr22', {path: '/'})
   }
-
-
-
 
   /*
     Get request to /get_all_spots
@@ -138,15 +134,10 @@ class App extends React.Component {
             currentUser: response.data.username
           });
         }
-        //TODO: else if set cookie for username
       })
       .catch(function(error) {
         console.log(error);
       });
-
-    // TODO: ajax call to /login to do server side login
-
-
 
     refreshTokenSetup(res);
   };
