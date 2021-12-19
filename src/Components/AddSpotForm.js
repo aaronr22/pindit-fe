@@ -62,7 +62,7 @@ export class AddSpotForm extends React.Component {
   async getUserItins() {
     var self = this;
     console.log("[AddSpotForm] Await axios...");
-    const data = { data: this.props.currentUser };
+    const data = { data: this.cookies.get("user") }; // changed from this.props.currentUser
     await axios
       .post(process.env.REACT_APP_BE_URL + "/get_user_itins", data)
       .then(function(response) {
