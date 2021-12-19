@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import CreateNewList from "./CreateNewList";
 import "../index.css";
+import Cookies from "universal-cookie";
 
 export class AddSpotForm extends React.Component {
   constructor(props) {
@@ -13,6 +14,8 @@ export class AddSpotForm extends React.Component {
       userItins: [],
       showCreateList: false
     };
+
+    this.cookies = new Cookies();
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -152,6 +155,14 @@ export class AddSpotForm extends React.Component {
     if (showCreateList === true) {
       createList = <CreateNewList onSubmit={this.onSubmitNewList} />;
     }
+    let submit;
+    if(!this.cookies.get("user")) {
+      console.log("[addspot][cookie] empty")
+      submit = <input type="submit" value="Login to submit" disabled/>
+    } else {
+      console.log("[addspot][cookie]loggedin")
+      submit = <input type="submit" value="submit" />
+    }
     return (
       <div className="addSpotForm">
       <h1>Add me form!</h1>
@@ -181,7 +192,7 @@ export class AddSpotForm extends React.Component {
             </select>
           </label>
           <span onClick={this.createListOnClick}>+ create new list</span>
-          <input type="submit" value="submit" />
+          {submit}
         </form>
       </div>
     );

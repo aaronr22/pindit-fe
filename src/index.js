@@ -148,6 +148,8 @@ class App extends React.Component {
   onLogoutSuccess = () => {
     //TODO: uncomment to remove hardcoding of currentUser
 
+    this.cookies.remove("user")
+
     this.setState({
       currentUser: ""
     });
@@ -169,7 +171,8 @@ class App extends React.Component {
 
     // Logic to show Login or Logout component
     let loginButton;
-    if (this.state.currentUser === "") {
+    console.log("[Render][Cookie]",this.cookies.get("user"), typeof this.cookies.get("name") === "undefined")
+    if (typeof this.cookies.get("user") === "undefined") {
       loginButton = (
         <Login style={{ float: "right" }} onSuccess={this.onSuccess} />
       );
