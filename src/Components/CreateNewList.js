@@ -36,7 +36,7 @@ const CreateNewList = props => {
   return (
     <div>
       <h3>Add a guide!</h3>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="w-75">
         <label>
           Title
           <input
@@ -46,9 +46,9 @@ const CreateNewList = props => {
             value={title}
           />
         </label>
-        <label>
+        <label className="w-50">
           Location
-          <GooglePlacesAutocomplete
+          <GooglePlacesAutocomplete 
             selectProps={{
               isClearable: true,
               onChange: val => {
