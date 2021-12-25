@@ -27,13 +27,12 @@ export class MapContainer extends React.Component {
 
   onMarkerClick = (props, marker, e) => {
     let comment;
-    try{
-      comment = marker.comments
+    try {
+      comment = marker.comments;
+    } catch {
+      comment = null;
     }
-      catch {
-        comment = null
-      }
-      console.log("[onMarkerClick]", props);
+    console.log("[onMarkerClick]", props);
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
@@ -61,25 +60,31 @@ export class MapContainer extends React.Component {
       hideAddPlace: false
     });
   };
-  handleChangeLocation = (val) => {
+  handleChangeLocation = val => {
     // TODO: set the state
-    // TODO: in render, create this marker. 
-    console.log("[HandleLocChange]",val);
-    if(val !== null){
-    let latLng;
-    geocodeByAddress(val['label'])
-    .then(results => getLatLng(results[0]))
-    .then(({lat,lng}) => {
-        console.log("[MapContainer][handleChangeLocation]Got lat lng ", {lat, lng});
-        this.setState({
-          userInputPlace: {"markerVal": val.value, "location": {'lat': lat, 'lng': lng}}
+    // TODO: in render, create this marker.
+    console.log("[HandleLocChange]", val);
+    if (val !== null) {
+      let latLng;
+      geocodeByAddress(val["label"])
+        .then(results => getLatLng(results[0]))
+        .then(({ lat, lng }) => {
+          console.log("[MapContainer][handleChangeLocation]Got lat lng ", {
+            lat,
+            lng
+          });
+          this.setState({
+            userInputPlace: {
+              markerVal: val.value,
+              location: { lat: lat, lng: lng }
+            }
+          });
         });
-    })
-  } else {
-    this.setState({
-      userInputPlace: null
-    })
-  }
+    } else {
+      this.setState({
+        userInputPlace: null
+      });
+    }
     // TODO
     // change the active marker, change the view of the map
   };
@@ -89,7 +94,7 @@ export class MapContainer extends React.Component {
     //Need this so the container doesnt hide the other elements
     const containerStyle = {
       position: "relative",
-      
+
       height: "25vw"
     };
 
@@ -116,15 +121,10 @@ export class MapContainer extends React.Component {
     if (!this.state.hideAddPlace) {
       addSpot = (
         <div>
-          
           <AddSpotForm
             currentUser={this.props.currentUser}
             marker={this.state.activeMarker}
-          
-
           />
-          
-          
         </div>
       );
     }
@@ -133,54 +133,49 @@ export class MapContainer extends React.Component {
     if (this.props.guideOwner === this.props.currentUser) {
       console.log("[MapContainer][Autocomplete]");
       autocomplete = (
-        <div> 
-        <GooglePlacesAutocomplete
-          selectProps={{
-            placeholder: "Search for a place, trailhead, resturant...",
-            isClearable: true,
-            onChange: val => {
-              this.handleChangeLocation(val);
-            },
-            value: this.state.location
-          }}
-          name="map-location"
-          apiKey={process.env.REACT_APP_GOOGLE_PLACES}
-        />
+        <div>
+          <GooglePlacesAutocomplete
+            selectProps={{
+              placeholder: "Search for a place, trailhead, resturant...",
+              isClearable: true,
+              onChange: val => {
+                this.handleChangeLocation(val);
+              },
+              value: this.state.location
+            }}
+            name="map-location"
+            apiKey={process.env.REACT_APP_GOOGLE_PLACES}
+          />
         </div>
       );
     }
 
     let userMarker;
-    if(this.state.userInputPlace) {
+    if (this.state.userInputPlace) {
       let tmp = this.state.userInputPlace;
-      console.log(tmp)
+      console.log(tmp);
       userMarker = (
-      <Marker
-        key={tmp.markerVal.place_id}
-        name={tmp.markerVal.description}
-        position={tmp.location}
-        onClick={this.onMarkerClick}
-        g_id={tmp.markerVal.place_id}
-        comments={{}}
-        
-      />
-    );
-    initialCenter = tmp.location;
+        <Marker
+          key={tmp.markerVal.place_id}
+          name={tmp.markerVal.description}
+          position={tmp.location}
+          onClick={this.onMarkerClick}
+          g_id={tmp.markerVal.place_id}
+          comments={{}}
+        />
+      );
+      initialCenter = tmp.location;
     }
 
     console.log("[MapContainer] render", initialCenter);
     return (
       <div>
         <Container fluid className="mapContainerContainer">
+          <Row>{addSpot}</Row>
           <Row>
-            {addSpot}
-            </Row>
-            <Row>
-            <Col className="col-9">
+            <div className="col-md-9 col-sm-12 col-xs-12">
               <div className="mapContainer">
-              <div className="autocomplete">
-                {autocomplete}
-                </div>
+                <div className="autocomplete">{autocomplete}</div>
                 <Map
                   initialCenter={initialCenter}
                   center={initialCenter}
@@ -221,15 +216,15 @@ export class MapContainer extends React.Component {
                   </InfoWindowCustom>
                 </Map>
               </div>
-            </Col>
+            </div>
 
             {/* Comment column goes below */}
-            <Col className="col-3">
+            <div className="col-md-3 col-sm-12 col-xs-12">
               <CommentColumn
                 comments={this.state.activeComment}
                 title={this.state.selectedPlace.name}
               />
-            </Col>
+            </div>
           </Row>
         </Container>
       </div>

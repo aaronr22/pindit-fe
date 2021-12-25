@@ -231,7 +231,7 @@ class App extends React.Component {
             </div>
           </Row>
           <Row>
-            <Col className="col-9">
+            <Col className="col-md-9 col-xs-12">
               <CardGrid guideData={guideDetails} />
             </Col>
           </Row>
