@@ -172,7 +172,7 @@ export class MapContainer extends React.Component {
       <div>
         <Container fluid className="mapContainerContainer">
           <Container>{addSpot}</Container>
-          <Container>
+          <Row>
             <div className="col-md-9 col-sm-12 col-xs-12">
               <div className="mapContainer">
                 <div className="autocomplete">{autocomplete}</div>
@@ -225,7 +225,7 @@ export class MapContainer extends React.Component {
                 title={this.state.selectedPlace.name}
               />
             </div>
-          </Container>
+          </Row>
         </Container>
       </div>
     );
