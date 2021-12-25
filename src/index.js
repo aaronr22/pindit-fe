@@ -51,8 +51,13 @@ class App extends React.Component {
 
    handleCreateUsernameSubmit = async (val) => {
     var self = this;
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${sessionStorage.getItem("access_token")}`
+
+    };
     await axios
-      .post(process.env.REACT_APP_BE_URL +"/create_username", { username: val })
+      .post(process.env.REACT_APP_BE_URL +"/create_username", { username: val }, {headers:headers})
       .then(function(res) {
         console.log("[CreateUsername][Then]", res);
         // if its good, then hide the form
@@ -149,7 +154,7 @@ class App extends React.Component {
   */
   onLogoutSuccess = () => {
     //TODO: uncomment to remove hardcoding of currentUser
-
+    sessionStorage.removeItem("access_token")
     this.cookies.remove("user")
 
     this.setState({

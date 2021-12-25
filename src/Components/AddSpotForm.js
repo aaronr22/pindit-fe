@@ -29,8 +29,13 @@ export class AddSpotForm extends React.Component {
     var self = this;
     const data = d;
     console.log("[postnewlist] data", typeof data, data);
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${sessionStorage.getItem("access_token")}`
+
+    };
     await axios
-      .post(process.env.REACT_APP_BE_URL + "/submit_new_trip", data)
+      .post(process.env.REACT_APP_BE_URL + "/submit_new_trip", data, {headers:headers})
       .then(function(response) {
         console.log("[AddSpotForm] Success!");
       })
@@ -98,8 +103,12 @@ export class AddSpotForm extends React.Component {
     console.log("[PostNewSpot]");
     var self = this;
     const data = d;
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${sessionStorage.getItem("access_token")}`
+    }
     await axios
-      .post(process.env.REACT_APP_BE_URL + "/submitSpot", data)
+      .post(process.env.REACT_APP_BE_URL + "/submitSpot", data, {headers:headers})
       .then(function(response) {
         console.log("success!");
       })
