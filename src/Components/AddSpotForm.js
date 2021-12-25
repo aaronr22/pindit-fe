@@ -73,7 +73,6 @@ export class AddSpotForm extends React.Component {
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem("access_token")}`
-
     };
     console.log("headers", headers)
     await axios
@@ -83,9 +82,10 @@ export class AddSpotForm extends React.Component {
       )
       .then(function(response) {
         const itins = response.data; //type: string
-        const itins_parsed = JSON.parse(itins.replaceAll(/'/g, `"`)); // Parse to list and replace single qoute with double for the parser
+        console.log(itins, typeof(itins))
+        //const itins_parsed = JSON.parse(itins.replaceAll(/'/g, `"`)); // Parse to list and replace single qoute with double for the parser
         self.setState({
-          userItins: itins_parsed,
+          userItins: itins,
           showCreateList: false
         });
       })

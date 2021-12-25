@@ -13,7 +13,7 @@ const CreateNewList = props => {
     const value = target.value;
     // const name = target.name;
 
-    // console.log(value, name);
+    console.log("[CreateNewList] Value:",value);
     setTitle(value);
   };
 
@@ -30,6 +30,7 @@ const CreateNewList = props => {
     event.preventDefault();
     console.log("[CreateNewList] handleSubmit");
     const data = { title: title, location: location };
+    console.log("[HandleSubmit] data:", data)
     props.onSubmit(data);
   };
 

@@ -168,6 +168,16 @@ export class MapContainer extends React.Component {
     }
 
     console.log("[MapContainer] render", initialCenter);
+
+    // Logic for passing all comments or jsut one comment to the comment col
+    if (this.props.guideOwner) {
+      console.log("[MapCOntainer][Guide][Comment Logic]", typeof(this.props.markerDetails))
+      // Iterate through MarkerDetails and grab each of the 'comments'. throw them intwo a list
+      let comment_list = []
+
+      // Going to be a completely different structure, need to add the resturant name. Also means we need a new comment layout
+
+    }
     return (
       <div>
         <Container fluid className="mapContainerContainer">
