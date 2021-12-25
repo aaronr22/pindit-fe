@@ -49,7 +49,7 @@ const GuideContainer = (props) => {
         <div className="row justify-content-between">
           <Navbar fluid bg="dark" variant="dark">
             <div className="col">
-              <h1>Pin'd It!</h1>
+            <a href="/"><h1>Pin'd It!</h1></a>
             </div>
           </Navbar>
         </div>
