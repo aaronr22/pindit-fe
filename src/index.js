@@ -210,7 +210,7 @@ class App extends React.Component {
           </div>
         </Container>
         <Container fluid>
-          <Row style={{ marginBottom: "1rem" }}>
+          <Container style={{ marginBottom: "1rem" }}>
             <h1>Explore</h1>
             <span class="title-sub-text">See your friends favorite places</span>
 
@@ -219,22 +219,22 @@ class App extends React.Component {
               currentUser={currentUser}
               userLocation={userLocation}
             />
-          </Row>
-          <Row>
+          </Container>
+          <Container>
             <div className="d-flex justify-content-center w-75">
               <h1>Inspriation</h1>
             </div>
-          </Row>
-          <Row>
+          </Container>
+          <Container>
             <div className="d-flex justify-content-center w-75">
               <span class="title-sub-text">Check out your friends trips</span>
             </div>
-          </Row>
-          <Row>
+          </Container>
+          <Container>
             <Col className="col-md-9 col-xs-12">
               <CardGrid guideData={guideDetails} />
             </Col>
-          </Row>
+          </Container>
         </Container>
       </div>
     );

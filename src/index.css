@@ -52,16 +52,35 @@ html, body {
   font-size: 16px;
 }
 
+
+@media (min-width: 901px) {
+  .mapContainer {
+    height: 18rem !important;
+  }
+}
+
 @media (max-width: 900px) {
   html, body {
     font-size: 14px;
   }
+
+
+  .mapContainer {
+    height: 18rem !important;
+  }
+
 }
 
 @media (max-width: 300px) {
   html, body {
     font-size: 8px;
   }
+
+
+  .mapContainer {
+    height: 20rem !important;
+  }
+
 }
 
 .mapContainer {

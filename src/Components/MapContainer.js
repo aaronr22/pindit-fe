@@ -94,8 +94,8 @@ export class MapContainer extends React.Component {
     //Need this so the container doesnt hide the other elements
     const containerStyle = {
       position: "relative",
-
-      height: "25vw"
+      clear: "both",
+      height: "100%"
     };
 
     // const markerDetails = [
@@ -171,8 +171,8 @@ export class MapContainer extends React.Component {
     return (
       <div>
         <Container fluid className="mapContainerContainer">
-          <Row>{addSpot}</Row>
-          <Row>
+          <Container>{addSpot}</Container>
+          <Container>
             <div className="col-md-9 col-sm-12 col-xs-12">
               <div className="mapContainer">
                 <div className="autocomplete">{autocomplete}</div>
@@ -225,7 +225,7 @@ export class MapContainer extends React.Component {
                 title={this.state.selectedPlace.name}
               />
             </div>
-          </Row>
+          </Container>
         </Container>
       </div>
     );
