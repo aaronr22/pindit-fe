@@ -54,6 +54,5 @@
   },
   "devDependencies": {
     "dotenv-webpack": "^7.0.3"
-  },
-  "proxy": "http://localhost:5000"
+  }
 }
