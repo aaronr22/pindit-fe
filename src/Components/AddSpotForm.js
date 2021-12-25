@@ -30,7 +30,7 @@ export class AddSpotForm extends React.Component {
     const data = d;
     console.log("[postnewlist] data", typeof data, data);
     await axios
-      .post(process.env.REACT_APP_BE_URL +"/submit_new_trip", data)
+      .post(process.env.REACT_APP_BE_URL + "/submit_new_trip", data)
       .then(function(response) {
         console.log("[AddSpotForm] Success!");
       })
@@ -61,10 +61,21 @@ export class AddSpotForm extends React.Component {
   // To make this work, i changed the server to look for data in the form of data:{data:value}
   async getUserItins() {
     var self = this;
-    console.log("[AddSpotForm] Await axios...");
-    const data = { data: this.cookies.get("user") }; // changed from this.props.currentUser
+    console.log("[AddSpotForm] Await axios...", sessionStorage.getItem("access_token"));
+    const data = {
+      data: this.cookies.get("user")
+    }; // changed from this.props.currentUser
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${sessionStorage.getItem("access_token")}`
+
+    };
+    console.log("headers", headers)
     await axios
-      .post(process.env.REACT_APP_BE_URL + "/get_user_itins", data)
+      .post(
+        process.env.REACT_APP_BE_URL + "/get_user_itins", data,
+        {headers: headers}
+      )
       .then(function(response) {
         const itins = response.data; //type: string
         const itins_parsed = JSON.parse(itins.replaceAll(/'/g, `"`)); // Parse to list and replace single qoute with double for the parser
@@ -88,9 +99,9 @@ export class AddSpotForm extends React.Component {
     var self = this;
     const data = d;
     await axios
-      .post(process.env.REACT_APP_BE_URL +"/submitSpot", data)
+      .post(process.env.REACT_APP_BE_URL + "/submitSpot", data)
       .then(function(response) {
-        console.log("success!")
+        console.log("success!");
       })
       .catch(function(error) {
         console.log(error);
@@ -156,16 +167,16 @@ export class AddSpotForm extends React.Component {
       createList = <CreateNewList onSubmit={this.onSubmitNewList} />;
     }
     let submit;
-    if(!this.cookies.get("user")) {
-      console.log("[addspot][cookie] empty")
-      submit = <input type="submit" value="Login to submit" disabled/>
+    if (!this.cookies.get("user")) {
+      console.log("[addspot][cookie] empty");
+      submit = <input type="submit" value="Login to submit" disabled />;
     } else {
-      console.log("[addspot][cookie]loggedin")
-      submit = <input type="submit" value="submit" />
+      console.log("[addspot][cookie]loggedin");
+      submit = <input type="submit" value="submit" />;
     }
     return (
       <div className="addSpotForm">
-      <h1>Add me form!</h1>
+        <h1>Add me form!</h1>
         {createList}
         <form onSubmit={this.handleSubmit}>
           <label>

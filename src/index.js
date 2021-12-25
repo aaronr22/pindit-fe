@@ -127,8 +127,10 @@ class App extends React.Component {
         } else if (response.data.create_user === "true") {
           self.setState({ createUsername: true });
         } else {
-          console.log("[login][success] username:", response.data.username)
+          console.log("[login][success] username:", response.data)
           // const cookies = new Cookies();
+          console.log("Access token", response.data.access_token); //TODO: sessionStorage thing
+          sessionStorage.setItem('access_token', response.data.access_token)
           self.cookies.set("user", response.data.username, { path: "/" });
           self.setState({
             currentUser: response.data.username
