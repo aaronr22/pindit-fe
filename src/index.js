@@ -53,7 +53,7 @@ class App extends React.Component {
     var self = this;
     const headers = {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${sessionStorage.getItem("access_token")}`
+      'Authorization': `Bearer ${localStorage.getItem("access_token")}`
 
     };
     await axios
@@ -134,8 +134,8 @@ class App extends React.Component {
         } else {
           console.log("[login][success] username:", response.data)
           // const cookies = new Cookies();
-          console.log("Access token", response.data.access_token); //TODO: sessionStorage thing
-          sessionStorage.setItem('access_token', response.data.access_token)
+          console.log("Access token", response.data.access_token); //TODO: localStorage thing
+          localStorage.setItem('access_token', response.data.access_token)
           self.cookies.set("user", response.data.username, { path: "/" });
           self.setState({
             currentUser: response.data.username
@@ -154,7 +154,7 @@ class App extends React.Component {
   */
   onLogoutSuccess = () => {
     //TODO: uncomment to remove hardcoding of currentUser
-    sessionStorage.removeItem("access_token")
+    localStorage.removeItem("access_token")
     this.cookies.remove("user")
 
     this.setState({
@@ -178,12 +178,14 @@ class App extends React.Component {
 
     // Logic to show Login or Logout component
     let loginButton;
-    console.log("[Render][Cookie]",this.cookies.get("user"), typeof this.cookies.get("name") === "undefined")
-    if (typeof this.cookies.get("user") === "undefined") {
+    console.log("[Render][localStorage]", 'access_token' in localStorage, localStorage.getItem('access_token'))
+    if (!('access_token' in localStorage)) {
+      console.log("LOGIN")
       loginButton = (
         <Login style={{ float: "right" }} onSuccess={this.onSuccess} />
       );
     } else {
+      console.log('LOGOUT')
       loginButton = (
         <Logout style={{ float: "right" }} onSuccess={this.onLogoutSuccess} />
       );

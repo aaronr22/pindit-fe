@@ -31,7 +31,7 @@ export class AddSpotForm extends React.Component {
     console.log("[postnewlist] data", typeof data, data);
     const headers = {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${sessionStorage.getItem("access_token")}`
+      'Authorization': `Bearer ${localStorage.getItem("access_token")}`
 
     };
     await axios
@@ -66,13 +66,13 @@ export class AddSpotForm extends React.Component {
   // To make this work, i changed the server to look for data in the form of data:{data:value}
   async getUserItins() {
     var self = this;
-    console.log("[AddSpotForm] Await axios...", sessionStorage.getItem("access_token"));
+    console.log("[AddSpotForm] Await axios...", localStorage.getItem("access_token"));
     const data = {
       data: this.cookies.get("user")
     }; // changed from this.props.currentUser
     const headers = {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${sessionStorage.getItem("access_token")}`
+      'Authorization': `Bearer ${localStorage.getItem("access_token")}`
 
     };
     console.log("headers", headers)
@@ -105,7 +105,7 @@ export class AddSpotForm extends React.Component {
     const data = d;
     const headers = {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${sessionStorage.getItem("access_token")}`
+      'Authorization': `Bearer ${localStorage.getItem("access_token")}`
     }
     await axios
       .post(process.env.REACT_APP_BE_URL + "/submitSpot", data, {headers:headers})
