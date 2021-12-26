@@ -3,19 +3,23 @@ import GooglePlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from "react-google-places-autocomplete";
-import {Modal} from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 
 const CreateNewList = props => {
   const [title, setTitle] = React.useState("");
   const [location, setLocation] = React.useState(null);
   const [show, setShow] = useState(true);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    console.log("[CreateNewList][HandleClose]")
+    props.handleClose()
+    setShow(false);
+  }
   var handleChange = event => {
     const target = event.target;
     const value = target.value;
     // const name = target.name;
 
-    console.log("[CreateNewList] Value:",value);
+    console.log("[CreateNewList] Value:", value);
     setTitle(value);
   };
 
@@ -32,18 +36,15 @@ const CreateNewList = props => {
     event.preventDefault();
     console.log("[CreateNewList] handleSubmit");
     const data = { title: title, location: location };
-    console.log("[HandleSubmit] data:", data)
+    console.log("[HandleSubmit] data:", data);
     props.onSubmit(data);
   };
 
   return (
-    <Modal
-    show={show}
-    onHide={handleClose}
-    backdrop="static"
-    keyboard={false}
-    >
-      <h3>Add a guide!</h3>
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Create your own list!</Modal.Title>
+      </Modal.Header>
       <form onSubmit={handleSubmit} className="w-75">
         <label>
           Title
@@ -56,7 +57,7 @@ const CreateNewList = props => {
         </label>
         <label className="w-50">
           Location
-          <GooglePlacesAutocomplete 
+          <GooglePlacesAutocomplete
             selectProps={{
               isClearable: true,
               onChange: val => {
@@ -68,10 +69,11 @@ const CreateNewList = props => {
             apiKey={process.env.REACT_APP_GOOGLE_PLACES}
           />
         </label>
-
-        <button type="submit" value="submit">
-          Submit
-        </button>
+        <div className="modal-footer">
+          <button type="submit" value="submit">
+            Submit
+          </button>
+        </div>
       </form>
     </Modal>
   );

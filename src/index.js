@@ -160,6 +160,7 @@ class App extends React.Component {
     alert("Logout made successfully");
   };
 
+
   componentDidMount() {
     this.getMarkerDetails();
     this.getGuideDetails();

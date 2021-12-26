@@ -21,6 +21,7 @@ const CreateUsername = props => {
       <Modal
         show={show}
         onHide={handleClose}
+        backdrop="static" keyboard={false}
       >
         <Modal.Header>
           <Modal.Title>Create username</Modal.Title>

@@ -23,6 +23,7 @@ export class AddSpotForm extends React.Component {
     this.postNewList = this.postNewList.bind(this);
     this.onSubmitNewList = this.onSubmitNewList.bind(this);
     this.postNewSpot = this.postNewSpot.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   async postNewList(d) {
@@ -43,6 +44,11 @@ export class AddSpotForm extends React.Component {
       .catch(function(error) {
         console.log(error);
       });
+  }
+
+  handleClose() {
+    console.log("In handle close")
+    this.setState({showCreateList: false});
   }
 
   // OnSubmit Function for CreateNewList
@@ -174,7 +180,7 @@ export class AddSpotForm extends React.Component {
     console.log("[AddSpotForm] showcreatelist value", showCreateList);
     let createList;
     if (showCreateList === true) {
-      createList = <CreateNewList onSubmit={this.onSubmitNewList} />;
+      createList = <CreateNewList onSubmit={this.onSubmitNewList} handleClose={this.handleClose}/>;
     }
     let submit;
     if (!this.cookies.get("user")) {
