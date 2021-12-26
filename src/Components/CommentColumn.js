@@ -1,23 +1,32 @@
 import React from "react";
 import Comment from "./Comment";
 import { Row, Container } from "react-bootstrap";
+import CommentWithTitle from "./CommentWithTitle";
 // "comments": {"aaronr22": {"comment": "Love the pizza", "tags": "Cheap"}}
 const CommentColumn = props => {
   var dictToList = dict => {
     var returnList = [];
-    // console.log("Comment dict: ", dict)
     for (var i = 0; i < Object.keys(dict).length; i++) {
-      //    console.log("Object.keys:", Object.keys(dict)[i])
       var k = Object.keys(dict)[i];
       var tmpObj = {};
       tmpObj[k] = dict[k];
       returnList.push(tmpObj);
     }
-    console.log("Return list: ", returnList);
     return returnList;
   };
 
-  var commentList = dictToList(props.comments);
+  let c;
+  if (props.hasOwnProperty("comments")) {
+    var commentList = dictToList(props.comments);
+    c = commentList.map(row => (
+      <Comment comments={row} user={Object.keys(row)[0]} />
+    ));
+  } else {
+    // Do comment_list stuff here
+    c = props.comment_list.map(row => (
+      <CommentWithTitle name={row[0]} comment={row[1]} />
+    ));
+  }
 
   return (
     <div>
@@ -26,9 +35,7 @@ const CommentColumn = props => {
           <h3 className="commentColumnTitle  ">{props.title}</h3>
         </Row>
       </Container>
-      {commentList.map(row => (
-        <Comment comments={row} user={Object.keys(row)[0]} />
-      ))}
+      {c}
     </div>
   );
 };

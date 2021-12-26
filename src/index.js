@@ -59,9 +59,7 @@ class App extends React.Component {
     await axios
       .post(process.env.REACT_APP_BE_URL +"/create_username", { username: val }, {headers:headers})
       .then(function(res) {
-        console.log("[CreateUsername][Then]", res);
         // if its good, then hide the form
-        console.log("[res.data.type]", res.data.type);
         if (res.data.type === "success") {
           // TODO: set cookie = to the username
           let u_name = res.data.username;
@@ -117,7 +115,6 @@ class App extends React.Component {
       onSuccess function for login
     */
   onSuccess = async res => {
-    console.log("[Login Success] currentUser:", res.profileObj);
     const currentUser = res.profileObj.email;
 
     var self = this;
@@ -134,7 +131,6 @@ class App extends React.Component {
         } else {
           console.log("[login][success] username:", response.data)
           // const cookies = new Cookies();
-          console.log("Access token", response.data.access_token); //TODO: localStorage thing
           localStorage.setItem('access_token', response.data.access_token)
           self.cookies.set("user", response.data.username, { path: "/" });
           self.setState({
@@ -178,14 +174,11 @@ class App extends React.Component {
 
     // Logic to show Login or Logout component
     let loginButton;
-    console.log("[Render][localStorage]", 'access_token' in localStorage, localStorage.getItem('access_token'))
     if (!('access_token' in localStorage)) {
-      console.log("LOGIN")
       loginButton = (
         <Login style={{ float: "right" }} onSuccess={this.onSuccess} />
       );
     } else {
-      console.log('LOGOUT')
       loginButton = (
         <Logout style={{ float: "right" }} onSuccess={this.onLogoutSuccess} />
       );

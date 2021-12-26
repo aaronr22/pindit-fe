@@ -159,3 +159,11 @@ h1 {
   align-items:right;
 }
 
+.commentDiv {
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.mapRow {
+  height: 35vh;
+}

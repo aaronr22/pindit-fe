@@ -153,7 +153,6 @@ export class MapContainer extends React.Component {
     let userMarker;
     if (this.state.userInputPlace) {
       let tmp = this.state.userInputPlace;
-      console.log(tmp);
       userMarker = (
         <Marker
           key={tmp.markerVal.place_id}
@@ -168,21 +167,49 @@ export class MapContainer extends React.Component {
     }
 
     console.log("[MapContainer] render", initialCenter);
-
+    let commentBlock;
     // Logic for passing all comments or jsut one comment to the comment col
-    if (this.props.guideOwner) {
-      console.log("[MapCOntainer][Guide][Comment Logic]", typeof(this.props.markerDetails))
+    if (this.props.hasOwnProperty("guideOwner")) {
       // Iterate through MarkerDetails and grab each of the 'comments'. throw them intwo a list
-      let comment_list = []
+      let comment_list = [];
+      for (let i = 0; i < this.props.markerDetails.length; i++) {
+        try {
+          comment_list.push([
+            this.props.markerDetails[i]["name"],
+            this.props.markerDetails[i]["comments"][this.props.guideOwner][
+              "comment"
+            ]
+          ]);
+        } catch (error) {
+          console.log("undefined comment");
+        }
+      }
 
-      // Going to be a completely different structure, need to add the resturant name. Also means we need a new comment layout
-
+      //create comment list with this
+      console.log(this.state.activeComment);
+      if (Object.keys(this.state.activeComment).length !== 0) {
+        commentBlock = (
+          <CommentColumn
+            comments={this.state.activeComment}
+            title={this.state.selectedPlace.name}
+          />
+        );
+      } else {
+        commentBlock = <CommentColumn comment_list={comment_list} />;
+      }
+    } else {
+      commentBlock = (
+        <CommentColumn
+          comments={this.state.activeComment}
+          title={this.state.selectedPlace.name}
+        />
+      );
     }
     return (
       <div>
         <Container fluid className="mapContainerContainer">
           <Container>{addSpot}</Container>
-          <Row>
+          <Row className="mapRow">
             <div className="col-md-9 col-sm-12 col-xs-12">
               <div className="mapContainer">
                 <div className="autocomplete">{autocomplete}</div>
@@ -229,11 +256,8 @@ export class MapContainer extends React.Component {
             </div>
 
             {/* Comment column goes below */}
-            <div className="col-md-3 col-sm-12 col-xs-12">
-              <CommentColumn
-                comments={this.state.activeComment}
-                title={this.state.selectedPlace.name}
-              />
+            <div className="col-md-3 col-sm-12 col-xs-12 commentDiv">
+              {commentBlock}
             </div>
           </Row>
         </Container>
