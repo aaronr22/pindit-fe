@@ -3,11 +3,13 @@ import GooglePlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from "react-google-places-autocomplete";
+import {Modal} from "react-bootstrap";
 
 const CreateNewList = props => {
   const [title, setTitle] = React.useState("");
   const [location, setLocation] = React.useState(null);
-
+  const [show, setShow] = useState(true);
+  const handleClose = () => setShow(false);
   var handleChange = event => {
     const target = event.target;
     const value = target.value;
@@ -35,7 +37,12 @@ const CreateNewList = props => {
   };
 
   return (
-    <div>
+    <Modal
+    show={show}
+    onHide={handleClose}
+    backdrop="static"
+    keyboard={false}
+    >
       <h3>Add a guide!</h3>
       <form onSubmit={handleSubmit} className="w-75">
         <label>
@@ -66,7 +73,7 @@ const CreateNewList = props => {
           Submit
         </button>
       </form>
-    </div>
+    </Modal>
   );
 };
 

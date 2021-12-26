@@ -1,6 +1,6 @@
 import React from "react";
 import { BsXCircle } from "react-icons/bs";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import "../index.css";
 import Cookies from "universal-cookie";
 
@@ -26,15 +26,19 @@ export default Comment = props => {
     <div>
       <Container className="commentContainer">
         <Row>
+          <Col>
           <div className="col-9">
             <span className="comment text-wrap">
               {props.comments[props.user].comment}
             </span>
           </div>
           <div className="col-3 x">{minus}</div>
+          </Col>
         </Row>
         <Row className="align-self-end">
+        <Col>
           <span className="comment-title">by {props.user}</span>
+          </Col>
         </Row>
       </Container>
     </div>

@@ -57,6 +57,11 @@ html, body {
   .mapContainer {
     height: 18rem !important;
   }
+  .commentDiv {
+    height: 35vh;
+    overflow-y: scroll;
+    /* height: 100%; */
+  }
 }
 
 @media (max-width: 900px) {
@@ -69,6 +74,12 @@ html, body {
     height: 18rem !important;
   }
 
+  .commentDiv {
+    height: 18vh !important;
+    overflow-y: scroll;
+    /* height: 100%; */
+  }
+
 }
 
 @media (max-width: 300px) {
@@ -78,9 +89,13 @@ html, body {
 
 
   .mapContainer {
-    height: 20rem !important;
+    height: 18rem !important;
   }
 
+  .commentDiv {
+    height: 18vh;
+    overflow-y: scroll;
+  }
 }
 
 .mapContainer {
@@ -159,11 +174,7 @@ h1 {
   align-items:right;
 }
 
-.commentDiv {
+/* .commentDiv {
   overflow-y: scroll;
   height: 100%;
-}
-
-.mapRow {
-  height: 35vh;
-}
+} */

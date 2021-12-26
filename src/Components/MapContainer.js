@@ -210,7 +210,7 @@ export class MapContainer extends React.Component {
         <Container fluid className="mapContainerContainer">
           <Container>{addSpot}</Container>
           <Row className="mapRow">
-            <div className="col-md-9 col-sm-12 col-xs-12">
+            <Col className="col-md-9 col-sm-12 col-xs-12">
               <div className="mapContainer">
                 <div className="autocomplete">{autocomplete}</div>
                 <Map
@@ -253,7 +253,7 @@ export class MapContainer extends React.Component {
                   </InfoWindowCustom>
                 </Map>
               </div>
-            </div>
+            </Col>
 
             {/* Comment column goes below */}
             <div className="col-md-3 col-sm-12 col-xs-12 commentDiv">

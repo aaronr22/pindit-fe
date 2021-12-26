@@ -1,6 +1,6 @@
 import React from "react";
 import Comment from "./Comment";
-import { Row, Container } from "react-bootstrap";
+import { Row, Container, Col } from "react-bootstrap";
 import CommentWithTitle from "./CommentWithTitle";
 // "comments": {"aaronr22": {"comment": "Love the pizza", "tags": "Cheap"}}
 const CommentColumn = props => {
@@ -32,10 +32,15 @@ const CommentColumn = props => {
     <div>
       <Container>
         <Row className="justify-content-center">
-          <h3 className="commentColumnTitle  ">{props.title}</h3>
+          <Col>
+            <h3 className="commentColumnTitle  ">{props.title}</h3>
+          </Col>
+        </Row>
+        <Row>
+          <Col>{c}</Col>
         </Row>
       </Container>
-      {c}
+
     </div>
   );
 };

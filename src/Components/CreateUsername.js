@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Modal, Container, Button } from "react-bootstrap";
 const CreateUsername = props => {
-    const [show, setShow] = useState(true);
+  const [show, setShow] = useState(true);
   const [username, setUsername] = useState("")
 
   const handleChange = event => {
@@ -21,8 +21,6 @@ const CreateUsername = props => {
       <Modal
         show={show}
         onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
       >
         <Modal.Header>
           <Modal.Title>Create username</Modal.Title>

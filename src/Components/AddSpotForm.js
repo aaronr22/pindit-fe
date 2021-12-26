@@ -3,6 +3,7 @@ import axios from "axios";
 import CreateNewList from "./CreateNewList";
 import "../index.css";
 import Cookies from "universal-cookie";
+import {Modal} from "react-bootstrap";
 
 export class AddSpotForm extends React.Component {
   constructor(props) {

@@ -204,8 +204,10 @@ class App extends React.Component {
             </Navbar>
           </div>
         </Container>
-        <Container fluid>
-          <Container style={{ marginBottom: "1rem" }}>
+        <div>
+          <div style={{ marginBottom: "1rem" }}>
+          <div>
+            <div>
             <h1>Explore</h1>
             <span class="title-sub-text">See your friends favorite places</span>
 
@@ -214,23 +216,31 @@ class App extends React.Component {
               currentUser={currentUser}
               userLocation={userLocation}
             />
-          </Container>
-          <Container>
+            </div>
+            </div>
+          </div>
+          <div>
             <div className="d-flex justify-content-center w-75">
               <h1>Inspriation</h1>
             </div>
-          </Container>
-          <Container>
+          </div>
+          <div>
+            <Row>
+              <Col>
             <div className="d-flex justify-content-center w-75">
               <span class="title-sub-text">Check out your friends trips</span>
             </div>
-          </Container>
-          <Container>
+            </Col>
+            </Row>
+          </div>
+          <div>
+            <Row>
             <Col className="col-md-9 col-xs-12">
               <CardGrid guideData={guideDetails} />
             </Col>
-          </Container>
-        </Container>
+            </Row>
+          </div>
+        </div>
       </div>
     );
   }
