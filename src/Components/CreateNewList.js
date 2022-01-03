@@ -9,6 +9,7 @@ const CreateNewList = props => {
   const [title, setTitle] = React.useState("");
   const [location, setLocation] = React.useState(null);
   const [show, setShow] = useState(true);
+  const [locationText, setLocationText] = React.useState(null);
   const handleClose = () => {
     console.log("[CreateNewList][HandleClose]")
     props.handleClose()
@@ -24,11 +25,14 @@ const CreateNewList = props => {
   };
 
   var handleChangeLocation = val => {
+    setLocationText(val)
+    let addressText;
     geocodeByAddress(val["label"])
       .then(results => getLatLng(results[0]))
-      .then(({ lat, lng }) => {
+      .then(({lat, lng}) => {
         console.log("GOt lat lng ", { lat, lng });
         setLocation({ lat: lat, lng: lng });
+        setLocationText(val)
       });
   };
 
@@ -39,6 +43,8 @@ const CreateNewList = props => {
     console.log("[HandleSubmit] data:", data);
     props.onSubmit(data);
   };
+
+
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -63,7 +69,7 @@ const CreateNewList = props => {
               onChange: val => {
                 handleChangeLocation(val);
               },
-              value: location
+              value: locationText
             }}
             name="location"
             apiKey={process.env.REACT_APP_GOOGLE_PLACES}
