@@ -56,7 +56,7 @@ const GuideContainer = (props) => {
       </Container>
       <Container>
         <h1> {meta.title}</h1>
-        <span class="title-sub-text">by {meta.name}</span>
+        <span className="title-sub-text">by {meta.name}</span>
         <MapContainer
           markerDetails={markerDetails}
           mapCenter={mapCenter}

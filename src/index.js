@@ -13,6 +13,7 @@ import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Guide from "./routes/guides";
 import Cookies from "universal-cookie";
 import CreateUsername from "./Components/CreateUsername";
+import CreateNewList from "./Components/CreateNewList";
 
 class App extends React.Component {
   // hardcoding currentUser for now
@@ -23,9 +24,61 @@ class App extends React.Component {
       guideDetails: [],
       userLocation: {},
       currentUser: "",
-      createUsername: false
+      createUsername: false,
+      showCreateList: false
     };
     this.cookies = new Cookies();
+  }
+  
+   postNewList= async (d) => {
+    console.log("[PostNewList]");
+    var self = this;
+    const data = d;
+    console.log("[postnewlist] data", typeof data, data);
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem("access_token")}`
+
+    };
+    await axios
+      .post(process.env.REACT_APP_BE_URL + "/submit_new_trip", data, {headers:headers})
+      .then(function(response) {
+        console.log("[AddSpotForm] Success!");
+        self.handleClose()
+      })
+      .catch(function(error) {
+        this.props.onAuthError(error)
+        console.log(error);
+      });
+  }
+
+  onSubmitNewList= (data) => {
+    // TODO: what happens when submit happens?
+    // 1. Post request: follow form from main.js:111 document.getElementById("guideSubmit")
+    // 2. Call getUserItins
+    console.log("[AddSpotForm][CreateNewList]", data);
+
+    const d = {
+      title: data.title,
+      tags: "",
+      auto_details: { location: data.location }
+    };
+
+    console.log(d);
+    // this.postNewList(JSON.stringify(d));
+    this.postNewList(d);
+  }
+
+
+  createNewListOnClick = () => {
+    //TODO
+    this.setState({
+      showCreateList: true
+    });
+  }
+
+  createNewListOnSubmit = () => {
+    //TODO
   }
 
   /*
@@ -33,7 +86,6 @@ class App extends React.Component {
     Response: All the spots
     Gets the spots to create markers
   */
-
   async getMarkerDetails() {
     var self = this;
     console.log("Await axios...");
@@ -175,11 +227,17 @@ class App extends React.Component {
     }
   }
 
+  handleClose = () => {
+    console.log("In handle close")
+    this.setState({showCreateList: false});
+  }
+
   render() {
     const markerDetails = this.state.markerDetails;
     const guideDetails = this.state.guideDetails;
     const userLocation = this.state.userLocation;
     const currentUser = this.state.currentUser;
+    const showCreateList = this.state.showCreateList;
 
     // Logic to show Login or Logout component
     let loginButton;
@@ -200,6 +258,11 @@ class App extends React.Component {
       );
     }
 
+    let createList;
+    if(showCreateList === true) {
+      createList = <CreateNewList onSubmit={this.onSubmitNewList} handleClose={this.handleClose}/>;
+    }
+
     return (
       <div>
         <Container fluid>
@@ -218,7 +281,7 @@ class App extends React.Component {
           <div>
             <div>
             <h1>Explore</h1>
-            <span class="title-sub-text">See your friends favorite places</span>
+            <span className="title-sub-text">See your friends favorite places</span>
 
             <MapContainer
               markerDetails={markerDetails}
@@ -238,7 +301,7 @@ class App extends React.Component {
             <Row>
               <Col>
             <div className="d-flex justify-content-center w-75">
-              <span class="title-sub-text">Check out your friends trips</span>
+              <span className="title-sub-text">Check out your friends trips</span>
             </div>
             </Col>
             </Row>
@@ -247,6 +310,11 @@ class App extends React.Component {
             <Row>
             <Col className="col-md-9 col-xs-12">
               <CardGrid guideData={guideDetails} />
+            </Col>
+            <Col className="col-md-3">
+            <span className="title-sub-text">Been somewhere cool?</span>
+              <button className="btn btn-success" onClick={this.createNewListOnClick}>Create your own list!</button>
+              {createList}
             </Col>
             </Row>
           </div>
