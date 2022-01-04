@@ -250,9 +250,9 @@ export class MapContainer extends React.Component {
                     marker={this.state.activeMarker}
                     visible={this.state.showInfoWindow}
                   >
-                    <div>
-                      <h1>{this.state.selectedPlace.name}</h1>
-                      <button type="button" onClick={this.addMeOnClicked}>
+                    <div className="infowindow">
+                      <span className="title-sub-text">{this.state.selectedPlace.name}</span>
+                      <button className="btn btn-success" type="button" onClick={this.addMeOnClicked}>
                         add me
                       </button>
                     </div>

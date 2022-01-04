@@ -182,3 +182,12 @@ h1 {
 a {
   text-decoration: none !important;
 }
+
+.infowindow {
+  display: inline-flex;
+  align-items: center; 
+}
+
+.infowindow button {
+  margin-left: .5px;
+}
