@@ -178,3 +178,7 @@ h1 {
   overflow-y: scroll;
   height: 100%;
 } */
+
+a {
+  text-decoration: none !important;
+}

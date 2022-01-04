@@ -14,7 +14,7 @@ const GuideCard = props => {
     >
       <Card.Body>
         <div className={classes.cardBody}>
-          <Link to={"/guides/" + props.id} key={props.id}>
+          <Link to={"/guides/" + props.id} key={props.id} className="stretched-link" target="_blank">
             {props.title}
           </Link>
         </div>
