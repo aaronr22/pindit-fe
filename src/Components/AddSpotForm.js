@@ -42,6 +42,7 @@ export class AddSpotForm extends React.Component {
         console.log("[AddSpotForm] Success!");
       })
       .catch(function(error) {
+        this.props.onAuthError(error)
         console.log(error);
       });
   }
@@ -126,6 +127,7 @@ export class AddSpotForm extends React.Component {
       })
       .catch(function(error) {
         console.log(error);
+        this.props.onAuthError(error)
       });
   }
 
