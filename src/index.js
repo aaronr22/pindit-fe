@@ -167,6 +167,14 @@ class App extends React.Component {
     this.getUserLocation();
   }
 
+  onAuthError = (error) => {
+    if(error.response.status === 401) {
+      this.onLogoutSuccess()
+    } else {
+      console.log(error)
+    }
+  }
+
   render() {
     const markerDetails = this.state.markerDetails;
     const guideDetails = this.state.guideDetails;
@@ -216,6 +224,7 @@ class App extends React.Component {
               markerDetails={markerDetails}
               currentUser={currentUser}
               userLocation={userLocation}
+              onAuthError={this.onAuthError}
             />
             </div>
             </div>

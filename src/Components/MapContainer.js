@@ -124,6 +124,7 @@ export class MapContainer extends React.Component {
           <AddSpotForm
             currentUser={this.props.currentUser}
             marker={this.state.activeMarker}
+            onAuthError={this.props.onAuthError}
           />
         </div>
       );

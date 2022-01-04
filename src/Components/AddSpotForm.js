@@ -88,6 +88,10 @@ export class AddSpotForm extends React.Component {
         {headers: headers}
       )
       .then(function(response) {
+        console.log("[GET USER ITIN] RESPONSE STATUS", response.status)
+        if (response.status === 401 ){
+          console.log("BIG ERROR")
+        }
         const itins = response.data; //type: string
         console.log(itins, typeof(itins))
         //const itins_parsed = JSON.parse(itins.replaceAll(/'/g, `"`)); // Parse to list and replace single qoute with double for the parser
@@ -96,8 +100,9 @@ export class AddSpotForm extends React.Component {
           showCreateList: false
         });
       })
-      .catch(function(error) {
-        console.log(error);
+      .catch( (error) => {
+        console.log("In error!")
+        this.props.onAuthError(error)
       });
   }
 
