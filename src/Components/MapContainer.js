@@ -25,6 +25,10 @@ export class MapContainer extends React.Component {
     userInputPlace: null
   };
 
+  addMeClose = () => {
+    this.setState({hideAddPlace: true})
+  }
+
   onMarkerClick = (props, marker, e) => {
     let comment;
     try {
@@ -125,6 +129,7 @@ export class MapContainer extends React.Component {
             currentUser={this.props.currentUser}
             marker={this.state.activeMarker}
             onAuthError={this.props.onAuthError}
+            onClose={this.addMeClose}
           />
         </div>
       );

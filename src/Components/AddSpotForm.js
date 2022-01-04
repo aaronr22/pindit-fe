@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import CreateNewList from "./CreateNewList";
 import "../index.css";
@@ -13,17 +13,26 @@ export class AddSpotForm extends React.Component {
       comment: "",
       guide: "default",
       userItins: [],
-      showCreateList: false
+      showCreateList: false,
+      show: true
     };
+
+    
 
     this.cookies = new Cookies();
 
+    this.handleCloseAdd = this.handleCloseAdd.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.postNewList = this.postNewList.bind(this);
     this.onSubmitNewList = this.onSubmitNewList.bind(this);
     this.postNewSpot = this.postNewSpot.bind(this);
     this.handleClose = this.handleClose.bind(this);
+  }
+
+  handleCloseAdd = () => {
+    this.props.onClose();
+    this.setState({show: false});
   }
 
   async postNewList(d) {
@@ -89,10 +98,6 @@ export class AddSpotForm extends React.Component {
         {headers: headers}
       )
       .then(function(response) {
-        console.log("[GET USER ITIN] RESPONSE STATUS", response.status)
-        if (response.status === 401 ){
-          console.log("BIG ERROR")
-        }
         const itins = response.data; //type: string
         console.log(itins, typeof(itins))
         //const itins_parsed = JSON.parse(itins.replaceAll(/'/g, `"`)); // Parse to list and replace single qoute with double for the parser
@@ -152,7 +157,8 @@ export class AddSpotForm extends React.Component {
     }; //TODO
     this.postNewSpot(data);
     this.setState({
-      showCreateList: false
+      showCreateList: false,
+      show: false
     });
 
     console.log(this.state);
@@ -198,8 +204,11 @@ export class AddSpotForm extends React.Component {
       submit = <input type="submit" value="submit" />;
     }
     return (
+      <Modal show={this.state.show} onHide={this.handleCloseAdd}>
       <div className="addSpotForm">
-        <h1>Add me form!</h1>
+      <Modal.Header closeButton>
+        <Modal.Title>Save a spot!</Modal.Title>
+      </Modal.Header>
         {createList}
         <form onSubmit={this.handleSubmit}>
           <label>
@@ -225,10 +234,13 @@ export class AddSpotForm extends React.Component {
               {options}
             </select>
           </label>
+          <div className="modal-footer">
           <span onClick={this.createListOnClick}>+ create new list</span>
           {submit}
+          </div>
         </form>
       </div>
+      </Modal>
     );
   }
 }
