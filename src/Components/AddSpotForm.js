@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import CreateNewList from "./CreateNewList";
 import "../index.css";
 import Cookies from "universal-cookie";
-import {Modal} from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 
 export class AddSpotForm extends React.Component {
   constructor(props) {
@@ -16,8 +16,6 @@ export class AddSpotForm extends React.Component {
       showCreateList: false,
       show: true
     };
-
-    
 
     this.cookies = new Cookies();
 
@@ -32,8 +30,8 @@ export class AddSpotForm extends React.Component {
 
   handleCloseAdd = () => {
     this.props.onClose();
-    this.setState({show: false});
-  }
+    this.setState({ show: false });
+  };
 
   async postNewList(d) {
     console.log("[PostNewList]");
@@ -41,24 +39,25 @@ export class AddSpotForm extends React.Component {
     const data = d;
     console.log("[postnewlist] data", typeof data, data);
     const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem("access_token")}`
-
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`
     };
     await axios
-      .post(process.env.REACT_APP_BE_URL + "/submit_new_trip", data, {headers:headers})
+      .post(process.env.REACT_APP_BE_URL + "/submit_new_trip", data, {
+        headers: headers
+      })
       .then(function(response) {
         console.log("[AddSpotForm] Success!");
       })
       .catch(function(error) {
-        this.props.onAuthError(error)
+        this.props.onAuthError(error);
         console.log(error);
       });
   }
 
   handleClose() {
-    console.log("In handle close")
-    this.setState({showCreateList: false});
+    console.log("In handle close");
+    this.setState({ showCreateList: false });
   }
 
   // OnSubmit Function for CreateNewList
@@ -83,32 +82,34 @@ export class AddSpotForm extends React.Component {
   // To make this work, i changed the server to look for data in the form of data:{data:value}
   async getUserItins() {
     var self = this;
-    console.log("[AddSpotForm] Await axios...", localStorage.getItem("access_token"));
+    console.log(
+      "[AddSpotForm] Await axios...",
+      localStorage.getItem("access_token")
+    );
     const data = {
       data: this.cookies.get("user")
     }; // changed from this.props.currentUser
     const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem("access_token")}`
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`
     };
-    console.log("headers", headers)
+    console.log("headers", headers);
     await axios
-      .post(
-        process.env.REACT_APP_BE_URL + "/get_user_itins", data,
-        {headers: headers}
-      )
+      .post(process.env.REACT_APP_BE_URL + "/get_user_itins", data, {
+        headers: headers
+      })
       .then(function(response) {
         const itins = response.data; //type: string
-        console.log(itins, typeof(itins))
+        console.log(itins, typeof itins);
         //const itins_parsed = JSON.parse(itins.replaceAll(/'/g, `"`)); // Parse to list and replace single qoute with double for the parser
         self.setState({
           userItins: itins,
           showCreateList: false
         });
       })
-      .catch( (error) => {
-        console.log("In error!")
-        this.props.onAuthError(error)
+      .catch(error => {
+        console.log("In error!");
+        this.props.onAuthError(error);
       });
   }
 
@@ -122,17 +123,19 @@ export class AddSpotForm extends React.Component {
     var self = this;
     const data = d;
     const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem("access_token")}`
-    }
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`
+    };
     await axios
-      .post(process.env.REACT_APP_BE_URL + "/submitSpot", data, {headers:headers})
+      .post(process.env.REACT_APP_BE_URL + "/submitSpot", data, {
+        headers: headers
+      })
       .then(function(response) {
         console.log("success!");
       })
       .catch(function(error) {
         console.log(error);
-        this.props.onAuthError(error)
+        this.props.onAuthError(error);
       });
   }
 
@@ -193,53 +196,76 @@ export class AddSpotForm extends React.Component {
     console.log("[AddSpotForm] showcreatelist value", showCreateList);
     let createList;
     if (showCreateList === true) {
-      createList = <CreateNewList onSubmit={this.onSubmitNewList} handleClose={this.handleClose}/>;
+      createList = (
+        <CreateNewList
+          onSubmit={this.onSubmitNewList}
+          handleClose={this.handleClose}
+        />
+      );
     }
     let submit;
     if (!this.cookies.get("user")) {
       console.log("[addspot][cookie] empty");
-      submit = <input type="submit" value="Login to submit" disabled />;
+      submit = (
+        <input
+          type="submit"
+          value="Login to submit"
+          className="btn btn-warning addSpotSubmit" 
+          disabled
+        />
+      );
     } else {
       console.log("[addspot][cookie]loggedin");
-      submit = <input type="submit" value="submit" />;
+      submit = (
+        <input type="submit" value="submit" className="btn btn-success addSpotSubmit" />
+      );
     }
     return (
-      <Modal show={this.state.show} onHide={this.handleCloseAdd}>
-      <div className="addSpotForm">
-      <Modal.Header closeButton>
-        <Modal.Title>Save a spot!</Modal.Title>
-      </Modal.Header>
-        {createList}
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Comment
-            <input
-              type="text"
-              name="comment"
-              value={this.state.comment}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label>
-            Choose your list
-            <select
-              name="guide"
-              value={this.state.guide}
-              onChange={this.handleChange}
-            >
-              <option disabled selected value="default">
-                {" "}
-                -- select an option --{" "}
-              </option>
-              {options}
-            </select>
-          </label>
-          <div className="modal-footer">
-          <span onClick={this.createListOnClick}>+ create new list</span>
-          {submit}
-          </div>
-        </form>
-      </div>
+      <Modal className="addSpotForm" show={this.state.show} onHide={this.handleCloseAdd}>
+          <Modal.Header closeButton>
+            <Modal.Title>Save a spot!</Modal.Title>
+          </Modal.Header>
+          {createList}
+          <form onSubmit={this.handleSubmit}>
+          <div className="vstack">
+            <label>
+              Comment
+              </label>
+              <textarea
+                type="text"
+                name="comment"
+                rows="3"
+                value={this.state.comment}
+                onChange={this.handleChange}
+              />
+            
+            </div>
+            <div className="vstack">
+            <label>
+              Choose your list
+              </label>
+              <select
+                name="guide"
+                value={this.state.guide}
+                onChange={this.handleChange}
+              >
+                <option disabled selected value="default">
+                  {" "}
+                  -- select an option --{" "}
+                </option>
+                {options}
+              </select>
+              </div>
+            <div className="modal-footer d-flex">
+              <button
+                className="btn btn-primary align-self-center" 
+                onClick={this.createListOnClick}
+              >
+                + create new list
+              </button>
+              {submit}
+            </div>
+          </form>
       </Modal>
     );
   }

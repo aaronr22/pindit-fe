@@ -163,6 +163,21 @@ h1 {
   border-top: 1px solid rgb(235, 235, 235);
 }
 
+.addSpotForm select, textarea {
+  margin-left:1rem !important;
+  margin-right:1rem !important;
+  margin-bottom:1rem !important;
+}
+
+.addSpotSubmit {
+  margin: 0px;
+}
+
+.addSpotForm label {
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+}
+
 .autocomplete {
   margin-top: 15px;
   margin-bottom: 15px;
@@ -190,4 +205,9 @@ a {
 
 .infowindow button {
   margin-left: .5px;
+}
+
+.modal-footer {
+  display: inline-flex;
+  align-items: center; 
 }
