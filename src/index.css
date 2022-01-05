@@ -178,6 +178,25 @@ h1 {
   margin-right: 1rem !important;
 }
 
+.createNewList input {
+  margin-left:1rem !important;
+  margin-right:1rem !important;
+  margin-bottom:1rem !important;
+}
+
+.createNewList label {
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+}
+
+
+.placesAutocompleteCreateList {
+  margin-left:1rem !important;
+  margin-right:1rem !important;
+  margin-bottom:3rem !important;
+}
+
+
 .autocomplete {
   margin-top: 15px;
   margin-bottom: 15px;

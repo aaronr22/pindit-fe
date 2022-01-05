@@ -11,10 +11,10 @@ const CreateNewList = props => {
   const [show, setShow] = useState(true);
   const [locationText, setLocationText] = React.useState(null);
   const handleClose = () => {
-    console.log("[CreateNewList][HandleClose]")
-    props.handleClose()
+    console.log("[CreateNewList][HandleClose]");
+    props.handleClose();
     setShow(false);
-  }
+  };
   var handleChange = event => {
     const target = event.target;
     const value = target.value;
@@ -25,14 +25,14 @@ const CreateNewList = props => {
   };
 
   var handleChangeLocation = val => {
-    setLocationText(val)
+    setLocationText(val);
     let addressText;
     geocodeByAddress(val["label"])
       .then(results => getLatLng(results[0]))
-      .then(({lat, lng}) => {
+      .then(({ lat, lng }) => {
         console.log("GOt lat lng ", { lat, lng });
         setLocation({ lat: lat, lng: lng });
-        setLocationText(val)
+        setLocationText(val);
       });
   };
 
@@ -44,25 +44,25 @@ const CreateNewList = props => {
     props.onSubmit(data);
   };
 
-
-
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Create your own list!</Modal.Title>
       </Modal.Header>
-      <form onSubmit={handleSubmit} className="w-75">
-        <label>
-          Title
+      <form onSubmit={handleSubmit} className="">
+        <div className="createNewList vstack">
+          <label>Title</label>
           <input
             type="text"
             name="title"
+            placeholder="title"
             onChange={handleChange}
             value={title}
           />
-        </label>
-        <label className="w-50">
-          Location
+        </div>
+        <div className="createNewList vstack">
+          <label className="w-50">Location</label>
+          <div className="placesAutocompleteCreateList">
           <GooglePlacesAutocomplete
             selectProps={{
               isClearable: true,
@@ -74,9 +74,10 @@ const CreateNewList = props => {
             name="location"
             apiKey={process.env.REACT_APP_GOOGLE_PLACES}
           />
-        </label>
+          </div>
+        </div>
         <div className="modal-footer">
-          <button type="submit" value="submit">
+          <button type="submit" value="submit" className="btn btn-success">
             Submit
           </button>
         </div>

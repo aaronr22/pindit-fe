@@ -177,7 +177,7 @@ export class AddSpotForm extends React.Component {
     });
   }
   createListOnClick = () => {
-    console.log("[AddSpotForm] create list on click");
+    console.log("[AddSpotForm][CreateListOnClick]");
     this.setState({
       showCreateList: true
     });
@@ -257,7 +257,7 @@ export class AddSpotForm extends React.Component {
               </select>
               </div>
             <div className="modal-footer d-flex">
-              <button
+              <button type="button"
                 className="btn btn-primary align-self-center" 
                 onClick={this.createListOnClick}
               >
