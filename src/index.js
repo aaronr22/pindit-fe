@@ -278,7 +278,7 @@ class App extends React.Component {
         </Container>
        
         <div>
-        <Container>
+        <Container fluid>
           <div style={{ marginBottom: "1rem" }}>
           <div>
             <div>
