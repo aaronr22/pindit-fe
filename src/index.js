@@ -276,7 +276,9 @@ class App extends React.Component {
             </Navbar>
           </div>
         </Container>
+       
         <div>
+        <Container>
           <div style={{ marginBottom: "1rem" }}>
           <div>
             <div>
@@ -306,6 +308,7 @@ class App extends React.Component {
             </Col>
             </Row>
           </div>
+          </Container>
           <div>
             <Row>
             <Col className="col-md-9 col-xs-12">
